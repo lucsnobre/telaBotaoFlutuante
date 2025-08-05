@@ -1,18 +1,29 @@
 package lobo.cachorrada.clientes.screens
 
+import android.content.res.Configuration
 import android.media.Image
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.AlertDialogDefaults.shape
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -35,9 +46,11 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             BarraDeTitulo()
         },
         bottomBar = {
-            Text(text = "Barra Inferior")
+            BarraDeNavegacao()
         },
-        floatingActionButton = {}
+        floatingActionButton = {
+            BotaoFlutuante()
+        }
     ){ paddingValues ->
         Column (
             modifier = Modifier
@@ -74,21 +87,75 @@ fun BarraDeTitulo(modifier: Modifier = Modifier) {
                     )
                 }
                 Card(
-                    modifier = Modifier
-                        .size(60.dp),
-                    shape = CircleShape
-                )
-                Image(
-                    painter = painterResource(R.drawable.objetivo),
-                    contentDescription = "Foto do Perfil",
-                    contentScale = ContentScale.Crop
-                )
-            }
+                    modifier = Modifier.size(60.dp),
+                    shape = CircleShape,
+
+                ) {
+                        Image(
+                            painter = painterResource(R.drawable.objetivo),
+                            contentDescription = "Foto do Perfil",
+                            contentScale = ContentScale.Crop
+                        )
+                    }
+                }
         }
     )
 }
 
-@Preview
+@Composable
+fun BarraDeNavegacao (modifier: Modifier = Modifier) {
+    NavigationBar {
+        NavigationBarItem(selected = false,
+            onClick = { },
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.Home,
+                    contentDescription = "Home"
+                )
+            },
+            label = {
+                Text(text = "Home")
+            }
+        )
+        NavigationBarItem(selected = false,
+            onClick = { },
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.Favorite,
+                    contentDescription = "Favorite"
+                )
+            },
+            label = {
+                Text(text = "Favorite")
+            }
+        )
+        NavigationBarItem(selected = false,
+            onClick = { },
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.Menu,
+                    contentDescription = "Menu"
+                )
+            },
+            label = {
+                Text(text = "Menu")
+            }
+        )
+    }
+}
+
+@Composable
+fun BotaoFlutuante(modifier: Modifier = Modifier) {
+    FloatingActionButton(
+        onClick = {}
+    ) {
+        Icon(imageVector = Icons.Default.Add,
+            contentDescription = "Botão adicionar"
+        )
+    }
+}
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun HomeScreenPreview(){
     ClientesAppTheme {
