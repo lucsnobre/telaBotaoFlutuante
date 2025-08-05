@@ -72,11 +72,11 @@ fun BarraDeTitulo(modifier: Modifier = Modifier) {
     TopAppBar(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(0.dp),
         colors = TopAppBarDefaults
             .topAppBarColors(
                 containerColor = MaterialTheme
-                    .colorScheme.background
+                    .colorScheme.primary
             ),
         title = {
             Row (
@@ -87,11 +87,15 @@ fun BarraDeTitulo(modifier: Modifier = Modifier) {
                 Column {
                     Text(
                         text = "Maria da Silva",
-                        fontSize = 18.sp
+                        fontSize = 18.sp,
+                        color = MaterialTheme
+                            .colorScheme.onPrimary
                     )
                     Text(
                         text = "maria@email.com",
-                        fontSize = 18.sp
+                        fontSize = 18.sp,
+                        color = MaterialTheme
+                        .colorScheme.onPrimary
                     )
                 }
                 Card(
@@ -112,17 +116,26 @@ fun BarraDeTitulo(modifier: Modifier = Modifier) {
 
 @Composable
 fun BarraDeNavegacao (modifier: Modifier = Modifier) {
-    NavigationBar {
+    NavigationBar (
+        containerColor = MaterialTheme
+            .colorScheme.primary,
+        contentColor = MaterialTheme
+            .colorScheme.onPrimary
+    ) {
         NavigationBarItem(selected = false,
             onClick = { },
             icon = {
                 Icon(
                     imageVector = Icons.Default.Home,
-                    contentDescription = "Home"
+                    contentDescription = "Home",
+                    tint = MaterialTheme
+                        .colorScheme.onPrimary
                 )
             },
             label = {
-                Text(text = "Home")
+                Text(text = "Home",
+color = MaterialTheme.colorScheme.onPrimary
+                    )
             }
         )
         NavigationBarItem(selected = false,
