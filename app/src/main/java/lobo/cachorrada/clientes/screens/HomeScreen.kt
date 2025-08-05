@@ -143,11 +143,15 @@ color = MaterialTheme.colorScheme.onPrimary
             icon = {
                 Icon(
                     imageVector = Icons.Default.Favorite,
-                    contentDescription = "Favorite"
+                    contentDescription = "Favorite",
+                            tint = MaterialTheme
+                            .colorScheme.onPrimary
                 )
             },
             label = {
-                Text(text = "Favorite")
+                Text(text = "Favorite",
+                        color = MaterialTheme.colorScheme.onPrimary
+                )
             }
         )
         NavigationBarItem(selected = false,
@@ -155,11 +159,13 @@ color = MaterialTheme.colorScheme.onPrimary
             icon = {
                 Icon(
                     imageVector = Icons.Default.Menu,
-                    contentDescription = "Menu"
+                    contentDescription = "Menu",
+                            tint = MaterialTheme
+                            .colorScheme.onPrimary
                 )
             },
             label = {
-                Text(text = "Menu")
+                Text(text = "Menu", color = MaterialTheme.colorScheme.onPrimary)
             }
         )
     }
