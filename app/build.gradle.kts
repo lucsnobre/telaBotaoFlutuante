@@ -75,4 +75,6 @@ dependencies {
     // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
 
+    implementation(libs.retrofit)
+
 }

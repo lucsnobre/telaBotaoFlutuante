@@ -28,17 +28,17 @@ private val DarkColorScheme = darkColorScheme(
 
 private val LightColorScheme = lightColorScheme(
     primary = primaryLight,
-    onPrimary = onPrimaryDark,
-    secondary = secondaryDark,
-    onSecondary = onSecondaryDark,
-    tertiary = tertiaryDark,
-    onTertiary = onTertiaryDark,
-    background = backgroundDark,
-    onBackground = onBackgroundDark,
-    primaryContainer = primaryContainerDark,
-    onPrimaryContainer = onPrimaryContainerDark,
-    error = errorDark,
-    onError = onErrorDark
+    onPrimary = onPrimaryLight,
+    secondary = secondaryLight,
+    onSecondary = onSecondaryLight,
+    tertiary = tertiaryLight,
+    onTertiary = onTertiaryLight,
+    background = backgroundLight,
+    onBackground = onBackgroundLight,
+    primaryContainer = primaryContainerLight,
+    onPrimaryContainer = onPrimaryContainerLight,
+    error = errorLight,
+    onError = onErrorLight
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
