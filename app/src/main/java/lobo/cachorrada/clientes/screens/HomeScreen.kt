@@ -8,13 +8,17 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Favorite
@@ -40,18 +44,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.key.Key.Companion.R
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import lobo.cachorrada.clientes.R
+
 import lobo.cachorrada.clientes.ui.theme.ClientesAppTheme
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
-    Scaffold (
+    Scaffold(
         topBar = {
             BarraDeTitulo()
         },
@@ -59,59 +64,87 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             BarraDeNavegacao()
         },
         floatingActionButton = {
-            BotaoFlutuante()
+            BotaoCadastrar()
         }
-    ){ paddingValues ->
-        Column (
+
+    )
+    // Content
+    {
+            paddingValues ->
+        Column(
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize()
                 .background(color = MaterialTheme.colorScheme.background)
         ) {
-            Row (
+            Row(
                 modifier = Modifier
                     .padding(16.dp)
             ){
-                Icon(imageVector = Icons.Default.AccountBox, contentDescription = "lista de clientes", tint = MaterialTheme.colorScheme.onBackground)
+                Icon(
+                    imageVector = Icons.Default.AccountCircle,
+                    contentDescription = "Icone da lista de clientes",
+                    tint = MaterialTheme.colorScheme.onBackground
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = "Lista de clientes"
+                )
+            }
 
+            LazyColumn {
+                items(count = 10){
+                    ClientCard()
+                }
             }
         }
+
     }
 }
 
 @Composable
-fun ClienteCard(modifier: Modifier = Modifier){
-    Card (
+fun ClientCard(modifier: Modifier = Modifier) {
+    Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(70.dp),
-        colors = CardDefaults
-        .cardColors(
-            containerColor = MaterialTheme.colorScheme.primary
+            .height(70.dp)
+            .padding(
+                start = 8.dp,
+                end = 8.dp,
+                bottom = 8.dp
+            ),
+        colors = CardDefaults.cardColors(
+            contentColor = MaterialTheme.colorScheme.primary
         )
     ) {
-        Row (
+        Row(
             modifier = Modifier
                 .fillMaxSize()
-            .padding(8.dp),
+                .padding(86.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
-        ) {
+        ){
             Column {
                 Text(text = "Nome do cliente")
-                Text(text = "E-mail do cliente")
+                Text(text = "Email do client")
             }
+
             Icon(
-                ImageVector = Icons.Default.Delete,
+                imageVector = Icons.Default.Delete,
                 contentDescription = "Excluir"
             )
         }
+
     }
 }
 
 @Preview
 @Composable
-private fun ClienteCardPreview
+private fun ClientCardPreview() {
+    ClientesAppTheme {
+        ClientCard()
+    }
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -120,121 +153,151 @@ fun BarraDeTitulo(modifier: Modifier = Modifier) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(0.dp),
-        colors = TopAppBarDefaults
-            .topAppBarColors(
-                containerColor = MaterialTheme
-                    .colorScheme.primary
-            ),
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primary
+        ),
         title = {
-            Row (
+            Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
                 Column {
                     Text(
-                        text = "Maria da Silva",
+                        text = "Lucas",
                         fontSize = 18.sp,
-                        color = MaterialTheme
-                            .colorScheme.onPrimary
+                        color = MaterialTheme.colorScheme.onPrimary
                     )
                     Text(
-                        text = "maria@email.com",
-                        fontSize = 18.sp,
-                        color = MaterialTheme
-                        .colorScheme.onPrimary
+                        text = "lucas@gmail.com",
+                        fontSize = 16.sp,
+                        color = MaterialTheme.colorScheme.onPrimary
                     )
                 }
-                Card(
-                    modifier = Modifier.size(60.dp),
-                    shape = CircleShape,
-
+                Card (
+                    modifier = Modifier
+                        .size(60.dp),
+                    shape = CircleShape
                 ) {
-                        Image(
-                            painter = painterResource(R.drawable.objetivo),
-                            contentDescription = "Foto do Perfil",
-                            contentScale = ContentScale.Crop
-                        )
-                    }
+                    Image(
+                        painter = painterResource(R.drawable.objetivo),
+                        contentDescription = "Foto do Perfil",
+                        contentScale = ContentScale.Crop
+                    )
                 }
+            }
         }
     )
 }
 
+@Preview
 @Composable
-fun BarraDeNavegacao (modifier: Modifier = Modifier) {
+private fun BarraDeTituloPreview() {
+    ClientesAppTheme {
+        BarraDeTitulo()
+    }
+}
+
+@Composable
+fun BarraDeNavegacao(modifier: Modifier = Modifier) {
     NavigationBar (
-        containerColor = MaterialTheme
-            .colorScheme.primary,
-        contentColor = MaterialTheme
-            .colorScheme.onPrimary
+        containerColor = MaterialTheme.colorScheme.primary,
+        contentColor = MaterialTheme.colorScheme.onPrimary
     ) {
-        NavigationBarItem(selected = false,
-            onClick = { },
+        NavigationBarItem(
+            selected = false,
+            onClick = {},
             icon = {
                 Icon(
                     imageVector = Icons.Default.Home,
                     contentDescription = "Home",
-                    tint = MaterialTheme
-                        .colorScheme.onPrimary
+                    tint = MaterialTheme.colorScheme.onPrimary
                 )
             },
             label = {
-                Text(text = "Home",
-color = MaterialTheme.colorScheme.onPrimary
-                    )
+                Text(
+                    text = "Home",
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
             }
         )
-        NavigationBarItem(selected = false,
-            onClick = { },
+        NavigationBarItem(
+            selected = false,
+            onClick = {},
             icon = {
                 Icon(
                     imageVector = Icons.Default.Favorite,
-                    contentDescription = "Favorite",
-                            tint = MaterialTheme
-                            .colorScheme.onPrimary
+                    contentDescription = "Home",
+                    tint = MaterialTheme.colorScheme.onPrimary
                 )
             },
             label = {
-                Text(text = "Favorite",
-                        color = MaterialTheme.colorScheme.onPrimary
+                Text(
+                    text = "Favoritos",
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
             }
         )
-        NavigationBarItem(selected = false,
-            onClick = { },
+        NavigationBarItem(
+            selected = false,
+            onClick = {},
             icon = {
                 Icon(
                     imageVector = Icons.Default.Menu,
-                    contentDescription = "Menu",
-                            tint = MaterialTheme
-                            .colorScheme.onPrimary
+                    contentDescription = "Home",
+                    tint = MaterialTheme.colorScheme.onPrimary
                 )
             },
             label = {
-                Text(text = "Menu", color = MaterialTheme.colorScheme.onPrimary)
+                Text(
+                    text = "Menu",
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
             }
         )
     }
 }
 
 @Composable
-fun BotaoFlutuante(modifier: Modifier = Modifier) {
+fun BotaoCadastrar(modifier: Modifier = Modifier) {
     FloatingActionButton(
         onClick = {},
         containerColor = MaterialTheme.colorScheme.tertiary
     ) {
-        Icon(imageVector = Icons.Default.Add,
-            contentDescription = "Botão adicionar",
+        Icon(
+            imageVector = Icons.Default.Add,
+            contentDescription = "Botão Adicionar",
             tint = MaterialTheme.colorScheme.onTertiary
         )
     }
 }
 
+
+
+
+
+
+
+@Preview
+@Composable
+private fun BotaoCadastrarPreview() {
+    ClientesAppTheme {
+        BotaoCadastrar()
+    }
+}
+
+@Preview
+@Composable
+private fun BarraDeNavegacaoPreview() {
+    ClientesAppTheme {
+        BarraDeNavegacao()
+    }
+}
+
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun HomeScreenPreview(){
+private fun HomeScreenPreview() {
     ClientesAppTheme {
-        BarraDeTitulo()
+        HomeScreen()
     }
 }
